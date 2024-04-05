@@ -12,12 +12,13 @@ export const CoursePage = () => {
         const fetchCourse = async () => {
             try {
                 const response = await fetch(`http://localhost:3001/student/${id}/additionalCourse/${courseId}`,{
-                    method: 'POST',
+                    method: 'GET',
                 headers: {
                     Authorization: `Bearer ${token}`,
                     'Content-Type': 'application/json',
                 },
                 });
+                console.log(response);
                 if (!response.ok) {
                     throw new Error('Failed to fetch course');
                 }

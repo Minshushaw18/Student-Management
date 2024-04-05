@@ -41,7 +41,6 @@ export const getAllAdditionalCourses = async (req, res) => {
 
     let additionalCourses = await AdditionalCourse.find();
     additionalCourses.map( (course) => setStatus(course));
-    console.log(additionalCourses);
     res.status(200).json(additionalCourses);
   } catch (error) {
     console.error(error);
@@ -53,9 +52,9 @@ export const getAllAdditionalCourses = async (req, res) => {
 // Route to get a specific additional course by ID
 export const getAdditionalCourseById = async (req, res) => {
   try {
-    const additionalCourse = await AdditionalCourse.findOne(req.params.courseId);
-    additionalCourse = setStatus(additionalCourse);
-
+    const courseId = req.params.courseId
+    const additionalCourse = await AdditionalCourse.findById(courseId);
+    setStatus(additionalCourse);
     if (!additionalCourse) {
       return res.status(404).json({ error: 'Additional Course not found' });
     }
